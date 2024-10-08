@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -26,6 +27,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,12 +68,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                startActivity(new Intent(MainActivity.this,NewNote.class));
+                startActivity(new Intent(MainActivity.this, NewNote.class));
             }
         });
 
 
-
+        // Object  ->  {"":"" , "":""}
+        // Array  ->  ["","",""]
 
         RequestQueue que = Volley.newRequestQueue(MainActivity.this);
 
@@ -79,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("+--+", "onResponse: " + response);
+
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    String status = jsonObject.getString("status");
+//
+//
+//                } catch (JSONException e) {
+//                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         }, new Response.ErrorListener() {
@@ -91,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
             //            Map<String,String> = heder
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-
-
                 HashMap<String, String> header = new HashMap<>();
                 header.put("x-apikeeda-key", "p1727874311879vqw342375297yx");
 

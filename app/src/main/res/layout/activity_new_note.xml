@@ -13,37 +13,75 @@
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        tools:ignore="MissingConstraints" />
+        android:hint="Title"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            tools:ignore="MissingConstraints" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.google.android.material.textfield.TextInputLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt"
-        android:inputType="textMultiLine"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="w"
+        android:hint="Date"
+        tools:ignore="MissingConstraints" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:inputType="textMultiLine"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Title"
+        tools:ignore="MissingConstraints" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt"
+            android:inputType="textMultiLine"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintBottom_toBottomOf="parent">
 
 
         <Button
             android:id="@+id/Save"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:backgroundTint="#000000"
             android:text="SAVE"
-            android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:layout_margin="5dp"
             android:textStyle="bold" />
 
 
@@ -51,11 +89,11 @@
             android:id="@+id/Cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:backgroundTint="#000000"
             android:text="CANCEL"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
