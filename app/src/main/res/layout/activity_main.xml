@@ -26,14 +26,18 @@
         android:backgroundTint="#857C7C"
         android:src="@drawable/add" />
 
+    <androidx.recyclerview.widget.RecyclerView
 
-    <ListView
-        android:id="@+id/tex"
+        android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70sp">
+        android:layout_marginTop="70sp"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="2"
+        android:background="#48A29E9E"
+        tools:ignore="InvalidId">
 
-    </ListView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/pop"
@@ -43,7 +47,6 @@
         android:layout_margin="10sp"
         android:backgroundTint="#857C7C"
         android:src="@drawable/dot" />
-
 
 
 

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -33,7 +34,8 @@ public class NewNote extends AppCompatActivity {
 
     Button Save,Cancel;
 
-  TextInputEditText txt;
+    TextInputEditText title,des;
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,8 @@ public class NewNote extends AppCompatActivity {
 
         setContentView(R.layout.activity_new_note);
 
-        txt = findViewById(R.id.txt);
+        title = findViewById(R.id.title);
+        des = findViewById(R.id.description);
         Save = findViewById(R.id.Save);
         Cancel = findViewById(R.id.Cancel);
 
@@ -56,16 +59,56 @@ public class NewNote extends AppCompatActivity {
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.show();
 
-                TextView  tex = dialog.findViewById(R.id.tex);
                 Button yes = dialog.findViewById(R.id.yes);
                 Button no = dialog.findViewById(R.id.no);
 
-                tex.getText();
+
 
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        RequestQueue que = Volley.newRequestQueue(NewNote.this);
 
+                        String url = "https://service.apikeeda.com/api/v1/notes";
+
+                        StringRequest post = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("+--+", "onResponse: " + response);
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                                Log.d("+--+", "onResponse: " + error);
+                            }
+                        }) {
+                            //            Map<String,String> = heder
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                HashMap<String, String> header = new HashMap<>();
+                                header.put("x-apikeeda-key", "u1728652257324irb777494598xo");
+
+                                return header;
+                            }
+
+                            //            Map<String,String> =
+                            @Nullable
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+
+                                HashMap<String, String> params = new HashMap<>();
+
+                                params.put("title", title.getText().toString());
+                                params.put("date", "2024-02-29T11:22:15.945Z");
+                                params.put("description", des.getText().toString());
+
+                                return params;
+                            }
+                        };
+                        que.add(post);
                         startActivity(new Intent(NewNote.this,MainActivity.class));
                         finish();
                     }
@@ -93,56 +136,7 @@ public class NewNote extends AppCompatActivity {
         });
 
 
-        RequestQueue que = Volley.newRequestQueue(NewNote.this);
 
-        String url = "https://service.apikeeda.com/api/v1/notes";
-
-        StringRequest post = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("+--+", "onResponse: " + response);
-
-//                try {
-//                    JSONObject jsonObject = new JSONObject(response);
-//                    String status = jsonObject.getString("status");
-//
-//
-//                } catch (JSONException e) {
-//                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-//                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.d("+--+", "onResponse: " + error);
-            }
-        }) {
-            //            Map<String,String> = heder
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> header = new HashMap<>();
-                header.put("x-apikeeda-key", "p1727874311879vqw342375297yx");
-
-                return header;
-            }
-
-            //            Map<String,String> =
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                HashMap<String, String> params = new HashMap<>();
-
-                params.put("title", " new cdmi");
-                params.put("date", "2024-02-29T11:22:15.945Z");
-                params.put("description", " new institute");
-
-                return params;
-            }
-        };
-        que.add(post);
 
 
 

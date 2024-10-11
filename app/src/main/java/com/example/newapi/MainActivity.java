@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,8 +38,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     SearchView Search;
-    ListView tex;
     FloatingActionButton add, pop;
+    RecyclerView recycle;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,9 +48,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Search = findViewById(R.id.Search);
-        tex = findViewById(R.id.tex);
         add = findViewById(R.id.add);
         pop = findViewById(R.id.pop);
+
+        recycle = findViewById(R.id.recycle);
+
+
+        MyDataBase db = new MyDataBase(MainActivity.this);
 
         pop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
         // Object  ->  {"":"" , "":""}
         // Array  ->  ["","",""]
 
@@ -80,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
         String url = "https://service.apikeeda.com/api/v1/notes";
 
-        StringRequest post = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest post = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("+--+", "onResponse: " + response);
+                Log.d("+--+", "onResponse:  get" + response);
 
 //                try {
 //                    JSONObject jsonObject = new JSONObject(response);
@@ -99,31 +106,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.d("+--+", "onResponse: " + error);
+                Log.d("+--+", "onResponse: not " + error);
             }
         }) {
             //            Map<String,String> = heder
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> header = new HashMap<>();
-                header.put("x-apikeeda-key", "p1727874311879vqw342375297yx");
+                header.put("x-apikeeda-key", "u1728652257324irb777494598xo");
 
                 return header;
             }
 
-            //            Map<String,String> =
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                HashMap<String, String> params = new HashMap<>();
-
-                params.put("title", " new cdmi");
-                params.put("date", "2024-02-29T11:22:15.945Z");
-                params.put("description", " new institute");
-
-                return params;
-            }
         };
         que.add(post);
 

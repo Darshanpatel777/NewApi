@@ -12,53 +12,42 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="?actionBarSize"
         android:hint="Title"
+        app:boxStrokeColor="#A585DE"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            tools:ignore="MissingConstraints" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="w"
-        android:hint="Date"
-        tools:ignore="MissingConstraints" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/date"
             android:inputType="textMultiLine"
-            android:textSize="30sp"
             android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="25sp"
             tools:ignore="MissingConstraints" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="Title"
-        tools:ignore="MissingConstraints" >
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="Description"
+        app:boxStrokeColor="#A585DE"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt"
+            android:layout_height="match_parent"
             android:inputType="textMultiLine"
-            android:textSize="30sp"
+            android:gravity="left"
             android:textColor="@color/black"
+            android:textSize="25sp"
             tools:ignore="MissingConstraints" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
-
 
         <Button
             android:id="@+id/Save"
