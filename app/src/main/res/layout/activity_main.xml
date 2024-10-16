@@ -5,15 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <SearchView
+        android:id="@+id/Search"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:id="@+id/Search"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,12 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70sp"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:spanCount="2"
         android:background="#48A29E9E"
-        tools:ignore="InvalidId">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/pop"
@@ -47,7 +44,6 @@
         android:layout_margin="10sp"
         android:backgroundTint="#857C7C"
         android:src="@drawable/dot" />
-
 
 
 </RelativeLayout>

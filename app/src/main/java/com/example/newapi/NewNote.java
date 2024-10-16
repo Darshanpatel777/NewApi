@@ -27,14 +27,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class NewNote extends AppCompatActivity {
 
-    Button Save,Cancel;
-
-    TextInputEditText title,des;
+    Button Save, Cancel;
+    TextInputEditText title, des;
+    Calendar cr;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -48,98 +49,57 @@ public class NewNote extends AppCompatActivity {
         Save = findViewById(R.id.Save);
         Cancel = findViewById(R.id.Cancel);
 
+        cr = Calendar.getInstance();
+
 
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                RequestQueue que = Volley.newRequestQueue(NewNote.this);
 
-                Dialog dialog = new Dialog(NewNote.this);
-                dialog.setContentView(R.layout.dialogview_save);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.show();
+                String url = "https://service.apikeeda.com/api/v1/notes";
 
-                Button yes = dialog.findViewById(R.id.yes);
-                Button no = dialog.findViewById(R.id.no);
-
-
-
-                yes.setOnClickListener(new View.OnClickListener() {
+                StringRequest post = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
-                    public void onClick(View v) {
-                        RequestQueue que = Volley.newRequestQueue(NewNote.this);
+                    public void onResponse(String response) {
+                        Log.d("+--+", "onResponse: " + response);
 
-                        String url = "https://service.apikeeda.com/api/v1/notes";
-
-                        StringRequest post = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.d("+--+", "onResponse: " + response);
-
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                                Log.d("+--+", "onResponse: " + error);
-                            }
-                        }) {
-                            //            Map<String,String> = heder
-                            @Override
-                            public Map<String, String> getHeaders() throws AuthFailureError {
-                                HashMap<String, String> header = new HashMap<>();
-                                header.put("x-apikeeda-key", "u1728652257324irb777494598xo");
-
-                                return header;
-                            }
-
-                            //            Map<String,String> =
-                            @Nullable
-                            @Override
-                            protected Map<String, String> getParams() throws AuthFailureError {
-
-                                HashMap<String, String> params = new HashMap<>();
-
-                                params.put("title", title.getText().toString());
-                                params.put("date", "2024-02-29T11:22:15.945Z");
-                                params.put("description", des.getText().toString());
-
-                                return params;
-                            }
-                        };
-                        que.add(post);
-                        startActivity(new Intent(NewNote.this,MainActivity.class));
-                        finish();
+                        startActivity(new Intent(NewNote.this, MainActivity.class));
                     }
-                });
-
-                no.setOnClickListener(new View.OnClickListener() {
+                }, new Response.ErrorListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onErrorResponse(VolleyError error) {
 
-                        dialog.dismiss();
+                        Log.d("+--+", "onResponse: " + error);
                     }
-                });
+                }) {
+                    //            Map<String,String> = heder
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> header = new HashMap<>();
+                        header.put("x-apikeeda-key", "u1728652257324irb777494598xo");
+
+                        return header;
+                    }
+
+                    //            Map<String,String> =
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+
+                        HashMap<String, String> params = new HashMap<>();
+
+                        params.put("title", title.getText().toString());
+                        params.put("date", cr.getTime().toString());
+                        params.put("description", des.getText().toString());
+
+                        return params;
+                    }
+                };
+                que.add(post);
             }
+
         });
-
-
-        Cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(NewNote.this,MainActivity.class));
-                finish();
-
-            }
-        });
-
-
-
-
-
-
-
     }
 }

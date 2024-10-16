@@ -29,9 +29,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     SearchView Search;
     FloatingActionButton add, pop;
     RecyclerView recycle;
+
+    ArrayList<Modalclass>  alldata = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,34 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Search = findViewById(R.id.Search);
         add = findViewById(R.id.add);
         pop = findViewById(R.id.pop);
-
         recycle = findViewById(R.id.recycle);
-
-
-        MyDataBase db = new MyDataBase(MainActivity.this);
-
-        pop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                PopupMenu pmenu = new PopupMenu(MainActivity.this, pop);
-
-                pmenu.inflate(R.menu.menu);
-                pmenu.show();
-            }
-        });
-
-
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                startActivity(new Intent(MainActivity.this, NewNote.class));
-            }
-        });
-
-
 
 
         // Object  ->  {"":"" , "":""}
@@ -92,14 +69,37 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("+--+", "onResponse:  get" + response);
 
-//                try {
-//                    JSONObject jsonObject = new JSONObject(response);
-//                    String status = jsonObject.getString("status");
-//
-//
-//                } catch (JSONException e) {
-//                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-//                }
+                alldata.clear();
+                try {
+                    JSONObject alldate = new JSONObject(response);
+                    JSONArray data = alldate.getJSONArray("data");
+
+                    for (int i = 0; i<data.length(); i++)
+                    {
+                        JSONObject one = data.getJSONObject(i);
+
+                        String id = one.getString("_id");
+                        String Title = one.getString("title");
+                        String date = one.getString("date");
+                        String description  = one.getString("description");
+
+                        Modalclass modalclass = new Modalclass(id,Title,date,description);
+                        Log.d("+-+-+-", "onResponse: "+modalclass);
+                        MainActivity.this.alldata.add(modalclass);
+
+                    }
+
+
+                } catch (JSONException e) {
+
+                    Log.d("=======", "onResponse: "+e);
+                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+                MyAdapter adpter = new MyAdapter(MainActivity.this, alldata);
+                recycle.setAdapter(adpter);
 
             }
         }, new Response.ErrorListener() {
@@ -120,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
 
         };
         que.add(post);
+
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity.this,NewNote.class));
+            }
+        });
 
     }
 
