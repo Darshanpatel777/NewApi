@@ -37,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<Myrecycle> {
 
         Modalclass  modal = alldata.get(position);
 
-        holder.id.setText(modal.getId());
+//        holder.id.setText(modal.getId());
         holder.date.setText(modal.getDate());
         holder.tit.setText(modal.getTitle());
         holder.des.setText(modal.getDescription());
@@ -53,7 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<Myrecycle> {
 class Myrecycle extends RecyclerView.ViewHolder {
 
 
-    TextView id;
+//    TextView id;
     TextView date;
     TextView tit;
     TextView des;
@@ -63,7 +63,7 @@ class Myrecycle extends RecyclerView.ViewHolder {
         super(itemView);
 
 
-        id = itemView.findViewById(R.id.id);
+//        id = itemView.findViewById(R.id.id);
         date = itemView.findViewById(R.id.date);
         tit = itemView.findViewById(R.id.Tit);
         des = itemView.findViewById(R.id.des);

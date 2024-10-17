@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -23,7 +23,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:backgroundTint="#857C7C"
+        android:backgroundTint="#AB8491"
         android:src="@drawable/add" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,7 +34,7 @@
         android:layout_marginTop="70sp"
         android:background="#48A29E9E"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:spanCount="2" />
+        app:spanCount="1" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/pop"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="10sp"
-        android:backgroundTint="#857C7C"
+        android:backgroundTint="#AB8491"
         android:src="@drawable/dot" />
 
 

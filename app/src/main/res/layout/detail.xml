@@ -3,19 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    android:background="@color/white"
+    android:background="#C3B8B8"
     android:orientation="vertical">
 
 
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-       android:layout_marginBottom="2dp"
-        android:textStyle="bold" />
+<!--    <TextView-->
+<!--        android:id="@+id/id"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp"-->
+<!--       android:layout_marginBottom="2dp"-->
+<!--        android:textStyle="bold" />-->
 
     <TextView
         android:id="@+id/date"
