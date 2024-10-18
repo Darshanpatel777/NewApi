@@ -24,6 +24,8 @@ public class Spacescreen extends AppCompatActivity {
             public void run() {
 
                 startActivity(new Intent(Spacescreen.this,MainActivity.class));
+
+                finish();
             }
         },1200);
 

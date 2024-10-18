@@ -66,6 +66,8 @@ public class NewNote extends AppCompatActivity {
                         Log.d("+--+", "onResponse: " + response);
 
                         startActivity(new Intent(NewNote.this, MainActivity.class));
+                        finish();
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -98,8 +100,11 @@ public class NewNote extends AppCompatActivity {
                     }
                 };
                 que.add(post);
+
             }
 
         });
+
     }
+
 }
